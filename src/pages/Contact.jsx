@@ -33,6 +33,7 @@ const FormGroup = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    text-align: left;
 
     label {
         font-weight: 500;
@@ -155,12 +156,13 @@ export default function Contact() {
 
     return (
         <ContactSection id="contact">
-            <h1>Contact</h1>
+            <h1>Contact</h1>            
             <FormContainer>
                 <Form onSubmit={handleSubmit}>
                     <FormGroup>
-                        <label>Name</label>
+                        <p>Have a question or want to work together? Fill out the form below and I'll get back to you when I can</p>
                         <input
+                            placeholder='Name'
                             type="text"
                             id="name"
                             name="name"
@@ -168,10 +170,8 @@ export default function Contact() {
                             onChange={handleChange}
                             required
                         />
-                    </FormGroup>
-                    <FormGroup>
-                        <label>Email</label>
                         <input
+                            placeholder='Email'
                             type="email"
                             id="email"
                             name="email"
@@ -179,20 +179,18 @@ export default function Contact() {
                             onChange={handleChange}
                             required
                         />
-                    </FormGroup>
-                    <FormGroup>
-                        <label>Message</label>
                         <textarea
+                            placeholder='Message'
                             id="message"
                             name="message"
                             value={formData.message}
                             onChange={handleChange}
                             required
                         />
-                    </FormGroup>
-                    <SubmitButton type="submit" disabled={isSubmitting}>
-                        {isSubmitting ? 'Sending...' : 'Send Message'}
-                    </SubmitButton>
+                        <SubmitButton type="submit" disabled={isSubmitting}>
+                            {isSubmitting ? 'Sending...' : 'Send Message'}
+                        </SubmitButton>
+                    </FormGroup>                   
                 </Form>
             </FormContainer>
         </ContactSection>

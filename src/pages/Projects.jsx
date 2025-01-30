@@ -99,7 +99,7 @@ const projects = [
         title: "Weather Dashboard",
         description: "Real-time weather information with detailed forecasts",
         image: "/img/weatherSS.png",
-        skills: ["Fill in later"],
+        skills: ["Javascript", "CSS", "HTML", "React"],
         // previewUrl: "", -- enter the website here
         githubUrl: "https://github.com/austinnakamatsu/weatherApp"
     },
@@ -108,7 +108,7 @@ const projects = [
         title: "Penny Store",
         description: "A basic store that uses redux and \"store\" elements to keep track of data",
         image: "/img/pennyStoreSS.png",
-        skills: ["Fill in later"],
+        skills: ["Javascript", "CSS", "HTML", "React"],
         // previewUrl: "", -- enter the website here
         githubUrl: "https://github.com/austinnakamatsu/pennyStore"
     },
