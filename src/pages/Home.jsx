@@ -4,7 +4,7 @@ export default function Home(){
         <div>
             <h1>Home</h1>
             <h2>Austin Nakamatsu</h2>
-            <h3>Full-Stack Engineer</h3>
+            <h3>Full-Stack Developer</h3>
         </div>
     )
   }

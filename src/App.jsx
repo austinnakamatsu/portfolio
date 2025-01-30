@@ -1,19 +1,37 @@
 import './App.css'
 import styled from '@emotion/styled'
+import { ThemeProvider } from '@emotion/react'
+
 import Home from './pages/Home'
 import AboutMe from './pages/AboutMe'
 import Projects from './pages/Projects'
 import Contact from './pages/Contact'
 
-import {
-    useRouteError
-} from 'react-router-dom'
+import { useRouteError } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
+//Dark mode css
+const lightTheme = {
+    background: '#ffffff',
+    text: '#333333',
+    nav: {
+      background: '#333',
+      text: 'white'
+    }
+}
+const darkTheme = {
+    background: '#1a1a1a',
+    text: '#ffffff',
+    nav: {
+        background: '#222',
+        text: 'white'
+    }
+}
+
+// Page css
 const Body = styled.div`
     margin: -0.5rem;
 `
-
 const NavBar = styled.nav`
     background-color: #333;
     padding: 1rem;
@@ -38,7 +56,6 @@ const NavBar = styled.nav`
         transform: scale(1.05);
     }
 `
-
 const NavLink = styled.a`
     color: white;
     text-decoration: none;
@@ -51,16 +68,21 @@ const NavLink = styled.a`
         color: #aaa;
     }
 `
-
 const Section = styled.section`
     min-height: 100vh;
     padding: 2rem;
     scroll-margin-top: 4rem;
+    background-color: ${props => props.theme.background};
+    color: ${props => props.theme.text};
 `
 
 export default function App() {
     const [activeSection, setActiveSection] = useState('home');
-
+    const [isDarkMode, setIsDarkMode] = useState(false);
+    
+    const toggleDarkMode = () => {
+        setIsDarkMode(!isDarkMode);
+    };
     useEffect(() => {
         const options = {
             root: null,
@@ -94,59 +116,61 @@ export default function App() {
     };
 
     return (
-        <Body>
-            <NavBar>
-                <ul>
-                    <li>
-                        <NavLink 
-                            onClick={(e) => scrollToSection(e, 'home')}
-                            isActive={activeSection === 'home'}
-                        >
-                            Home
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink 
-                            onClick={(e) => scrollToSection(e, 'about')}
-                            isActive={activeSection === 'about'}>
-                            About Me
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink 
-                            onClick={(e) => scrollToSection(e, 'projects')}
-                            isActive={activeSection === 'projects'}>
-                            Projects
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink 
-                            onClick={(e) => scrollToSection(e, 'contact')}
-                            isActive={activeSection === 'contact'}>
-                            Contact
-                        </NavLink>
-                    </li>
-                    <li>Dark Mode</li>
-                </ul>
-            </NavBar>
-            <main>
-                <Section id="home">
-                    <Home/>
-                </Section>
-                
-                <Section id="about">
-                    <AboutMe/>
-                </Section>
-                
-                <Section id="projects">
-                    <Projects/>
-                </Section>
-                
-                <Section id="contact">
-                    <Contact/>
-                </Section>
-            </main>
-        </Body>
+        <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+            <Body>
+                <NavBar>
+                    <ul>
+                        <li>
+                            <NavLink 
+                                onClick={(e) => scrollToSection(e, 'home')}
+                                isActive={activeSection === 'home'}>
+                                Home
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink 
+                                onClick={(e) => scrollToSection(e, 'about')}
+                                isActive={activeSection === 'about'}>
+                                About Me
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink 
+                                onClick={(e) => scrollToSection(e, 'projects')}
+                                isActive={activeSection === 'projects'}>
+                                Projects
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink 
+                                onClick={(e) => scrollToSection(e, 'contact')}
+                                isActive={activeSection === 'contact'}>
+                                Contact
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink onClick={toggleDarkMode}>
+                                {isDarkMode ? '🌙 Dark' : '☀️ Light'}
+                            </NavLink>
+                        </li>
+                    </ul>
+                </NavBar>
+                <main>
+                    <Section id="home">
+                        <Home/>
+                    </Section>                    
+                    <Section id="about">
+                        <AboutMe/>
+                    </Section>                    
+                    <Section id="projects">
+                        <Projects/>
+                    </Section>                    
+                    <Section id="contact">
+                        <Contact/>
+                    </Section>
+                </main>
+            </Body>
+        </ThemeProvider>
     )
 }
 

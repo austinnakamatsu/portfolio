@@ -16,13 +16,15 @@ const ProjectGrid = styled.div`
 `
 
 const ProjectCard = styled.div`
-    background: white;
+    background: ${props => props.theme.background};
+    color: ${props => props.theme.text};
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease;
     cursor: pointer;
     position: relative;
+    
 
     &:hover {
         transform: translateY(-10px);
@@ -59,10 +61,12 @@ const ProjectOverlay = styled.div`
 
 const ProjectContent = styled.div`
     padding: 1.5rem;
+    ;
 `
 
 const SkillTag = styled.span`
-    background: #f0f0f0;
+    background: #f0f0f0; 
+    color: #333333;     
     padding: 0.25rem 0.75rem;
     border-radius: 15px;
     margin: 0.25rem;
@@ -83,14 +87,33 @@ const projects = [
     },
     {
         id: 2,
-        title: "Weather Dashboard",
-        description: "Real-time weather information with detailed forecasts",
-        // image: "",
-        skills: ["Fill in later"],
+        title: "Star Wars DB",
+        description: "Basic Star Wars database with a React router",
+        image: "/img/starwarsSS.png",
+        skills: ["Javascript", "CSS", "HTML", "React"],
         // previewUrl: "", -- enter the website here
+        githubUrl: "https://github.com/austinnakamatsu/starWarsDB"
     },
     {
         id: 3,
+        title: "Weather Dashboard",
+        description: "Real-time weather information with detailed forecasts",
+        image: "/img/weatherSS.png",
+        skills: ["Fill in later"],
+        // previewUrl: "", -- enter the website here
+        githubUrl: "https://github.com/austinnakamatsu/weatherApp"
+    },
+    {
+        id: 4,
+        title: "Penny Store",
+        description: "A basic store that uses redux and \"store\" elements to keep track of data",
+        image: "/img/pennyStoreSS.png",
+        skills: ["Fill in later"],
+        // previewUrl: "", -- enter the website here
+        githubUrl: "https://github.com/austinnakamatsu/pennyStore"
+    },
+    {
+        id: 5,
         title: "Recipe Finder",
         description: "Search and save your favorite recipes with filtering options",
         // image: "",
@@ -98,7 +121,7 @@ const projects = [
         // previewUrl: "", -- enter the website here
     },
     {
-        id: 4,
+        id: 6,
         title: "AI Fitness Coach",
         description: "Personal workout recommendations using AI",
         // image: "",

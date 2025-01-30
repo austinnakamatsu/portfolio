@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { useTheme } from '@emotion/react'
 
 const ModalOverlay = styled.div`
     position: fixed;
@@ -14,17 +15,19 @@ const ModalOverlay = styled.div`
 `
 
 const ModalContent = styled.div`
-    background: white;
+    background: ${props => props.theme.background};
+    color: ${props => props.theme.text};
     padding: 2rem;
     border-radius: 8px;
     max-width: 800px;
     width: 90%;
     max-height: 90vh;
     overflow-y: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 `
 
 export default function ProjectModal({ project, onClose }) {
-    if (!project) return null;
+    const theme = useTheme()
 
     return (
         <ModalOverlay onClick={onClose}>
