@@ -161,8 +161,8 @@ export default function AboutMe() {
 
         <GalleryContainer>
           <img src="Hanauma.jpg" alt="Pic of Hanauma Bay" />
-          <video src="Snow.MOV" autoPlay muted loop />
-          <video src="Sunset.MOV" autoPlay muted loop />
+          <video src="Snow.mp4" autoPlay muted loop />
+          <video src="Sunset.mp4" autoPlay muted loop />
           <img src="Pikes.jpg" alt="Pic of Pikes Peak" />
         </GalleryContainer>
       </article>
