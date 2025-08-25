@@ -120,7 +120,7 @@ const projects = [
     id: 1,
     title: "Star Wars DB",
     description: "Modern Star Wars App built with React that lets users explore characters, planets, and films from a simplified local version of the Star Wars API. With smooth navigation powered by React Router, the app provides an easy way to browse different categories in an interactive and approachable interface.",
-    image: "/starWars.png",
+    image: "starWars.png",
     skills: ["JavaScript", "React", "HTML", "CSS"],
     githubUrl: "https://github.com/austinnakamatsu/starWarsDB",
     liveUrl: "https://austinnakamatsu.github.io/starWarsDB/"
