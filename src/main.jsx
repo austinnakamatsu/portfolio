@@ -9,8 +9,6 @@ import App from './App.jsx'
 import { ErrorPage } from './App.jsx'
 
 import Home from './pages/Home.jsx'
-
-import { Provider } from 'react-redux'
 import AboutMe from './pages/AboutMe.jsx'
 import Projects from './pages/Projects.jsx'
 import Contact from './pages/Contact.jsx'
@@ -33,9 +31,6 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      {/* <Provider store={store}>
-        <RouterProvider router={router} />
-      </Provider> */}
       <RouterProvider router={router} />
     </QueryClientProvider>
   </StrictMode>,

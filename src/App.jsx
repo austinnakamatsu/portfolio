@@ -1,6 +1,8 @@
 import './App.css'
 import styled from '@emotion/styled'
 import { ThemeProvider } from '@emotion/react'
+import { FaGithub, FaLinkedin } from 'react-icons/fa'
+
 
 import Home from './pages/Home'
 import AboutMe from './pages/AboutMe'
@@ -9,6 +11,8 @@ import Contact from './pages/Contact'
 
 import { useRouteError } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+
+import { Background } from './components/Background'
 
 //Dark mode css
 const lightTheme = {
@@ -30,14 +34,24 @@ const darkTheme = {
 
 // Page css
 const Body = styled.div`
-    margin: -0.5rem;
+    margin: 0;
+    padding: 0;
 `
 const NavBar = styled.nav`
     background-color: #333;
-    padding: 1rem;
+    padding: 1rem 2rem;
     position: sticky;
     top: 0;
     z-index: 100;
+    width: 100%;
+    box-sizing: border-box;
+    left: 0; 
+    right: 0; 
+    display: flex;
+    justify-content: space-between; /* 👈 name on left, links on right */
+    align-items: center;
+
+    overflow: visible;
     
     ul {
         list-style: none;
@@ -46,6 +60,7 @@ const NavBar = styled.nav`
         font-size: large;
         margin: 0;
         padding: 0;
+        align-items: center;
     }
     
     ul > li {
@@ -54,6 +69,10 @@ const NavBar = styled.nav`
     
     ul > li:hover {
         transform: scale(1.05);
+    }
+    img {
+        height: 2rem;
+        cursor: pointer;
     }
 `
 const NavLink = styled.a`
@@ -69,16 +88,35 @@ const NavLink = styled.a`
     }
 `
 const Section = styled.section`
-    min-height: 100vh;
     padding: 2rem;
     scroll-margin-top: 4rem;
-    background-color: ${props => props.theme.background};
+    /* background-color: ${props => props.theme.background}; */
+    background-color: transparent;
     color: ${props => props.theme.text};
 `
 
+const HomeSection = styled.section`
+    /* padding: 2rem; */
+    scroll-margin-top: 4rem;
+    /* background-color: ${props => props.theme.background}; */
+    background-color: transparent;
+    color: ${props => props.theme.text};
+`
+
+const Footer = styled.footer`
+  background: rgba(0, 0, 0, 0.6); /* translucent so background shows */
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  margin-top: 2rem;
+  backdrop-filter: blur(6px); /* soft blur like your cards */
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+`;
+
 export default function App() {
     const [activeSection, setActiveSection] = useState('home');
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(true);
     
     const toggleDarkMode = () => {
         setIsDarkMode(!isDarkMode);
@@ -117,8 +155,12 @@ export default function App() {
 
     return (
         <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+            <Background themeMode={isDarkMode ? 'dark' : 'light'} />
             <Body>
                 <NavBar>
+                    <div style={{ color: "white", fontSize: "1.5rem", fontWeight: "bold" }}>
+                    Austin Nakamatsu
+                    </div>
                     <ul>
                         <li>
                             <NavLink 
@@ -153,22 +195,39 @@ export default function App() {
                                 {isDarkMode ? '🌙 Dark' : '☀️ Light'}
                             </NavLink>
                         </li>
+                        <li>
+                            <a href="https://github.com/austinnakamatsu"
+                                target="_blank" 
+                                rel="noopener noreferrer">
+                                <FaGithub size={24} color="white" />
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/austinnakamatsu/"
+                                target="_blank" 
+                                rel="noopener noreferrer">
+                                <FaLinkedin size={24} color="white" />
+                            </a>
+                        </li>   
                     </ul>
                 </NavBar>
                 <main>
-                    <Section id="home">
+                    <HomeSection id="home">
                         <Home/>
-                    </Section>                    
-                    <Section id="about">
-                        <AboutMe/>
-                    </Section>                    
-                    <Section id="projects">
-                        <Projects/>
-                    </Section>                    
-                    <Section id="contact">
-                        <Contact/>
-                    </Section>
+                    </HomeSection>  
+                        <Section id="about">
+                            <AboutMe/>
+                        </Section>                    
+                        <Section id="projects">
+                            <Projects/>
+                        </Section>                    
+                        <Section id="contact">
+                            <Contact/>
+                        </Section>   
                 </main>
+                <Footer>
+                    © {new Date().getFullYear()} Austin Nakamatsu. All rights reserved.
+                </Footer>
             </Body>
         </ThemeProvider>
     )

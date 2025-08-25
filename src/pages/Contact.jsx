@@ -5,10 +5,8 @@ import Swal from 'sweetalert2'
 const ACCESS_KEY = import.meta.env.VITE_ACCESS_KEY
 
 const ContactSection = styled.section`
-    min-height: 100vh;
+    /* min-height: 100vh; */
     padding: 2rem;
-    scroll-margin-top: 4rem;
-    background: ${props => props.theme.background};
     color: ${props => props.theme.text};
 `
 
@@ -16,11 +14,9 @@ const FormContainer = styled.div`
     max-width: 600px;
     margin: 2rem auto;
     padding: 2rem;
-    background: ${props => props.theme.background === '#ffffff' 
-        ? 'white' 
-        : '#2d2d2d'};
+    backdrop-filter: blur(0.15rem);
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 `
 
 const Form = styled.form`
@@ -30,47 +26,59 @@ const Form = styled.form`
 `
 
 const FormGroup = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto; /* centers form horizontally */
+  text-align: center; /* centers <p> text */
 
-    label {
-        font-weight: 500;
-        color: ${props => props.theme.text};
-    }
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color:  ${props => props.theme.text};
+  }
 
-    input, textarea {
-        padding: 0.75rem;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 1rem;
-        background: ${props => props.theme.background === '#ffffff' 
-            ? 'white' 
-            : '#1a1a1a'};
-        color: ${props => props.theme.text};
-        
-        &:focus {
-            outline: none;
-            border-color: #666;
-        }
-    }
+  input,
+  textarea {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-family: inherit; /* 👈 makes placeholder & input text inherit from parent font */
+    border: 1px solid #555;
+    border-radius: 8px;
+    background-color: ${props => props.theme.background === '#ffffff' 
+        ? '#ffffff'
+        :  '#333333' 
+    };
+    color: ${props => props.theme.background === '#ffffff' 
+        ? '#333333'
+        : '#ffffff'
+    };
+    outline: none;
 
-    textarea {
-        min-height: 150px;
-        resize: vertical;
+    &::placeholder {
+      font-family: inherit; /* 👈 placeholder font matches */
+      font-size: 1rem;
+      color: #aaa;
     }
-`
+  }
+
+  textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+`;
+
 
 const SubmitButton = styled.button`
     padding: 0.75rem 1.5rem;
     background-color: ${props => props.theme.background === '#ffffff' 
-        ? '#333333' 
-        : '#ffffff' 
+        ?  '#ffffff'
+        :  '#333333' 
     };
     color: ${props => props.theme.background === '#ffffff' 
-        ? '#ffffff'
-        : '#333333'
+        ? '#333333'
+        : '#ffffff'
     };
     border: none;
     border-radius: 4px;
@@ -90,6 +98,14 @@ const SubmitButton = styled.button`
             : '#666'};
         cursor: not-allowed;
     }
+`
+
+const ContactTitle = styled.h2`
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    color:  ${props => props.theme.text};
+    letter-spacing: -0.02em;
 `
 
 export default function Contact() {
@@ -131,10 +147,10 @@ export default function Contact() {
             const formData = new FormData(e.target);
             formData.append("access_key", ACCESS_KEY);
             console.log(ACCESS_KEY)
-            const response = await fetch("https://api.web3forms.com/submit", {
-            method: "POST",
-            body: formData
-            });
+            // const response = await fetch("https://api.web3forms.com/submit", {
+            // method: "POST",
+            // body: formData
+            // });
             Swal.fire({
                 title: "Success!",
                 text: "Your message has been sent.",
@@ -156,11 +172,11 @@ export default function Contact() {
 
     return (
         <ContactSection id="contact">
-            <h1>Contact</h1>            
+            <ContactTitle>Contact Me</ContactTitle>            
             <FormContainer>
                 <Form onSubmit={handleSubmit}>
                     <FormGroup>
-                        <p>Have a question or want to work together? Fill out the form below and I'll get back to you when I can</p>
+                        <p>Have a question or want to work together? Fill out the form below and I'll get back to you as soon as I can!</p>
                         <input
                             placeholder='Name'
                             type="text"
