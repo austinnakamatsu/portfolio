@@ -146,17 +146,27 @@ export default function Contact() {
             // back-end of the form
             const formData = new FormData(e.target);
             formData.append("access_key", ACCESS_KEY);
-            console.log(ACCESS_KEY)
-            // const response = await fetch("https://api.web3forms.com/submit", {
-            // method: "POST",
-            // body: formData
-            // });
-            Swal.fire({
-                title: "Success!",
-                text: "Your message has been sent.",
-                icon: "success"
+            // console.log(ACCESS_KEY)
+            const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: formData
             });
-            setFormData({name: '', email: '', message: ''})
+            const data = await response.json();
+
+            if (data.success) {
+                Swal.fire({
+                    title: "Success!",
+                    text: "Your message has been sent.",
+                    icon: "success"
+                });
+                setFormData({ name: '', email: '', message: '' });
+            } else {
+                Swal.fire({
+                    title: "Error!",
+                    text: data.message || "There was a problem sending your message.",
+                    icon: "error"
+                });
+            }
         }
         catch{
             Swal.fire({
